@@ -1,0 +1,4 @@
+*.txt
+template.cpp
+.vscode
+/.vscode/
