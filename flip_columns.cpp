@@ -10,7 +10,8 @@ int n,m,k;
 
 void solve(int cs)
 {
-    
+    cin >> n >> m >> k;
+    vector<int> 
 }
 
 int main()
