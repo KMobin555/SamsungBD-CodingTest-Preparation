@@ -6,29 +6,39 @@
 using namespace std;
 
 
-int n,m;
+int n,m,ans;
 bool is_ok = false,vis[11][11];
 
-void back(int i,int j,vector<vector<int>> &s,int l)
+void back(int i,int j,vector<vector<int>> &s,int max_till_now)
 {
     if(i<0 || i>=n || j<0 || j>=m) return;
     if(vis[i][j]) return;
 
-    vis[i][j] = true;
-    if(s[i][j]==3)
+    if(s[i][j]==3) 
     {
-        is_ok = true;
+        ans=min(ans,max_till_now);
         return;
     }
 
-    if(j+1<m && s[i][j+1]!=0 && !vis[i][j+1]) back(i,j+1,s,l);
-    if(j-1>=0 && s[i][j-1]!=0 && !vis[i][j-1]) back(i,j-1,s,l);
+    vis[i][j] = true;
 
-    for(int p=0;p<=l;p++)
+    if(j+1<m && s[i][j+1]!=0 && !vis[i][j+1]) back(i,j+1,s,max_till_now);
+    if(j-1>=0 && s[i][j-1]!=0 && !vis[i][j-1]) back(i,j-1,s,max_till_now);
+
+    int up = i-1;
+    while(up>=0)
     {
-        if(i-p>=0 && s[i-p][j]!=0 && !vis[i-p][j]) back(i-p,j,s,l);
-        if(i+p<n && s[i+p][j]!=0 && !vis[i+p][j]) back(i+p,j,s,l);
+        if(s[up][j]!=0 && !vis[up][j]) back(up,j,s,max(max_till_now,abs(up-i)));
+        up--;
     }
+    int down = i+1;
+    while(down<n)
+    {
+        if(s[down][j]!=0 && !vis[down][j]) back(down,j,s,max(max_till_now,abs(down-i)));
+        down++;
+    }
+
+    vis[i][j] = false;
 }
 
 void solve(int cs)
@@ -43,18 +53,10 @@ void solve(int cs)
         }
     }
 
+    ans = 11;
+    back(n-1,0,s,0);
 
-    for(int l=0;l<=n;l++)
-    {
-        is_ok = false;
-        memset(vis,false,sizeof(vis));
-        back(n-1,0,s,l);
-        if(is_ok) 
-        {
-            cout << l << endl;
-            return;
-        }
-    }
+    cout << ans << endl;
 }
 
 int main()
