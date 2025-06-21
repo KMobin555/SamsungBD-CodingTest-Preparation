@@ -66,7 +66,7 @@ void solve(int cs)
         auto [_,u] = pq.top();pq.pop();
         // cout << _ << endl;
         if(vis.count(u)) continue;
-        vis.insert(u);
+        vis.insert(u); 
 
         for(auto &[v,cost]:graph[u])
         {
