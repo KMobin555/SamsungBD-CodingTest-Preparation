@@ -15,40 +15,31 @@ void back(int arr[],int idx)
     int i=0;
     while(num>0 && i<n)
     {
-        // cout << i << endl;
-        if(i==0 && arr[pos]==0)
+        int left = pos-i;
+        int right = pos+i;
+
+        if(left>=1 && right<=n && arr[left]==0 && arr[right]==0 && num==1)
         {
-            arr[pos] = 1;
+            int tem_arr[sz] = {};
+            for(int i=1;i<=n;i++) tem_arr[i] = arr[i];
+
+            num--;
+            tem_arr[left] = abs(pos-left)+1;
+            back(tem_arr,idx+1);
+            arr[right] = abs(pos-right)+1;
+            back(arr,idx+1);
+        }
+
+        if(left>=1 && arr[left]==0 && num>0)
+        {
+            arr[left] = abs(pos-left)+1;
             num--;
         }
-        else
+        if(right<=n && arr[right]==0 && num>0)
         {
-            int left = pos-i;
-            int right = pos+i;
-
-            if(left>=1 && right<=n && arr[left]==0 && arr[right]==0 && num==1)
-            {
-                int tem_arr[sz] = {};
-                for(int i=1;i<=n;i++) tem_arr[i] = arr[i];
-
-                num--;
-                tem_arr[left] = abs(pos-left)+1;
-                back(tem_arr,idx+1);
-                arr[right] = abs(pos-right)+1;
-                back(arr,idx+1);
-            }
-
-            if(left>=1 && arr[left]==0 && num>0)
-            {
-                arr[left] = abs(pos-left)+1;
-                num--;
-            }
-            if(right<=n && arr[right]==0 && num>0)
-            {
-                arr[right] = abs(pos-right)+1;
-                // cout << "dd"<< endl;
-                num--;
-            }
+            arr[right] = abs(pos-right)+1;
+            // cout << "dd"<< endl;
+            num--;
         }
         i++;
     }
@@ -104,10 +95,8 @@ void solve(int cs)
 
 int main()
 {
-    // #ifndef ONLINE_JUDGE
     // freopen("input.txt","r",stdin);
     // freopen("output.txt","w",stdout);
-    // #endif
 
     int t = 1, cs = 1;
     // cin >> t;
