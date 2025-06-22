@@ -8,7 +8,7 @@ using namespace std;
 
 void solve(int cs)
 {
-
+    
 }
 
 int main()
