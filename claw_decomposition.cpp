@@ -61,14 +61,16 @@ void solve(int cs)
 
 void io()
 {
+    #ifndef ONLINE_JUDGE
     freopen("input.txt","r",stdin);
     freopen("output.txt","w",stdout);
+    #endif
 }
 
 int main()
 {
 
-    // io();
+    io();
     
     int t = 1, cs = 1;
     // cin >> t;
