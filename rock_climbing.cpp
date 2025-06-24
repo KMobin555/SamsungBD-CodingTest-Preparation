@@ -26,7 +26,7 @@ void dfs(int i,int j,int cnt)
 
     if(j+1<m && s[i][j+1]!=0 && !vis[i][j+1]) dfs(i,j+1,cnt);
 
-    if(j-1<m && s[i][j-1]!=0 && !vis[i][j-1]) dfs(i,j-1,cnt);
+    if(j-1>=0 && s[i][j-1]!=0 && !vis[i][j-1]) dfs(i,j-1,cnt);
 
 
     for(int k=1;k<=cnt;k++)
