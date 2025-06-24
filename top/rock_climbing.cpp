@@ -13,13 +13,14 @@ void dfs(int i,int j,int l)
     if(s[i][j]==0) return;
     if(vis[i][j]) return;
 
-    vis[i][j] = true;
     if(s[i][j]==3)
     {
         possible = true;
         return;
     }   
 
+    vis[i][j] = true;
+    
     if(j-1>=0 && s[i][j-1]!=0 && !vis[i][j-1])
         dfs(i,j-1,l);
 
